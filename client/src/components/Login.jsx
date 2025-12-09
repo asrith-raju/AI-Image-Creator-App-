@@ -2,13 +2,35 @@ import React,{useContext, useState,useEffect} from 'react'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/Appcontext'
 import { motion } from 'motion/react'
+import axios from 'axios'
 
 
 
 const Login = () => {
    
     const [state, setstate] = useState('Login')
-    const {setshowLogin} = useContext(AppContext)
+    const {setshowLogin,backendUrl} = useContext(AppContext)
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')  
+    const [password, setPassword] = useState('')
+
+    const onSubmitHandler = async(e)=>{
+        e.preventDefault()
+        try {
+          if(state==='Login'){
+            await axios.post(backendUrl+'/api/auth/login',{
+                email,
+                password
+            })
+          }
+
+
+
+        } catch (error) {
+          
+        }
+    }
     useEffect(() => {
     
        document.body.style.overflow = 'hidden';
@@ -23,7 +45,7 @@ const Login = () => {
   return (
     <div className='fixed top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center'>
       
-    <motion.form 
+    <motion.form onSubmit={onSubmitHandler}
       initial={{ opacity: 0.2, y: 50 }}
       transition={{ duration: 0.2 }}
       whileInView={{ opacity: 1 , y: 0 }}
@@ -36,19 +58,19 @@ const Login = () => {
     
       {state!= 'Login' && <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-4'>
         <img src={assets.user_icon} alt=""/>
-        <input className='outline-none text-sm' type="text" placeholder='Full Name' required/>
+        <input onChange={e =>setName(e.target.value)} value={name} className='outline-none text-sm' type="text" placeholder='Full Name' required/>
       </div>}
 
 
       <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-4'> 
         <img src={assets.email_icon} alt=""/>
-        <input className='outline-none text-sm' type="email" placeholder='Email id' required/>
+        <input onChange={e =>setEmail(e.target.value)} value={email} className='outline-none text-sm' type="email" placeholder='Email id' required/>
       </div>
 
 
       <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-4'>
         <img src={assets.lock_icon} alt=""/>
-        <input className='outline-none text-sm' type="password" placeholder='Password' required/>
+        <input onChange={e =>setPassword(e.target.value)} value={password} className='outline-none text-sm' type="password" placeholder='Password' required/>
       </div>
         <p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot password</p>
         <button className='bg-blue-600 w-full text-white py-2 rounded-full'>{state==='Login'?'login' : 'create account'}</button>
