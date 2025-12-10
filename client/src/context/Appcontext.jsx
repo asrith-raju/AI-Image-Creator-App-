@@ -30,6 +30,12 @@ const AppContextProvider = (props)=>{
         }
     }
 
+    const logout = ()=>{
+        localStorage.removeItem('token')
+        setToken('')
+        setuser(null)
+    }
+
     useEffect(() => {
         if(token){
             loadCreditdata()
@@ -37,7 +43,7 @@ const AppContextProvider = (props)=>{
     })
     
     const value={
-        user,setuser,showLogin,setshowLogin, backendUrl,token,setToken,credit,setCredit,loadCreditdata
+        user,setuser,showLogin,setshowLogin, backendUrl,token,setToken,credit,setCredit,loadCreditdata,logout
     }
 
     return(
