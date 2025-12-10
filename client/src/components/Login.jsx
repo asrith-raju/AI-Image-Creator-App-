@@ -20,7 +20,7 @@ const Login = () => {
         e.preventDefault()
         try {
           if(state==='Login'){
-            const {data} = await axios.post(backendUrl+'/api/auth/login',{
+            const {data} = await axios.post(backendUrl+'/api/user/login',{
                 email,
                 password
             })
@@ -34,7 +34,7 @@ const Login = () => {
             }
 
           }else{
-            const {data} = await axios.post(backendUrl+'/api/auth/register',{
+            const {data} = await axios.post(backendUrl+'/api/user/register',{
                 name,
                 email,
                 password
@@ -52,7 +52,7 @@ const Login = () => {
 
 
         } catch (error) {
-          
+            toast.error(error.message)
         }
     }
     useEffect(() => {
