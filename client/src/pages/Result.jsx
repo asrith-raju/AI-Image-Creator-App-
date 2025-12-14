@@ -37,7 +37,7 @@ const Result = () => {
       onSubmit={onSubmitHandler} action="" className='flex flex-col min-h-[90vh] justify-center items-center'>
       <div>
         <div className='relative '>
-          <img src={image} alt="" className='max-w-sm rounded' />
+          <img src={image} alt="" className=' w-full max-w-[350px] sm:max-w-sm rounded ' />  
           <span className={`absolute bottom-0 left-0 h-1 bg-blue-500 ${loading ? 'w-full translate-all duration-300' : 'w-0'}`} />
         </div>
 
@@ -48,8 +48,8 @@ const Result = () => {
       {!isImageLoaded &&
         <div className='flex w-full max-w-xl bg-neutral-500 text-white text-sm p-0.5 mt-10 rounded-full '>
           <input onChange={e => setInput(e.target.value)} value={input}
-            type="text" placeholder='Describe what you want to generate' className='flex-1 bg-transparent outline-none ml-8 max-sm:20 placeholder-color' />
-          <button type='submit' className='bg-zinc-900 px-10 sm:px-16 py-3 rounded-full'>Generate</button>
+            type="text" placeholder='Describe what you want to generate' className='flex-1 bg-transparent outline-none ml-5 sm:ml-8   text-[11px] sm:text-sm max-sm:20 placeholder-color' />
+          <button type='submit' className='bg-zinc-900 px-8 sm:px-16 py-3 rounded-full'>Generate</button>
         </div>
       }
 
